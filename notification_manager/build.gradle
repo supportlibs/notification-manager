@@ -5,6 +5,7 @@ plugins {
 }
 
 android {
+    namespace 'com.lib.notification_manager'
     compileSdk 31
 
     defaultConfig {
@@ -52,7 +53,7 @@ afterEvaluate {
 
                 groupId = 'com.github.supportlibs'
                 artifactId = 'notification-manager'
-                version = '1.0.2'
+                version = '1.0.3'
             }
         }
     }
