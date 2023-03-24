@@ -12,6 +12,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "notification_manager"
+rootProject.name = "notification-manager"
 include ':app'
-include ':notification_manager'
+include ':notification-manager'
