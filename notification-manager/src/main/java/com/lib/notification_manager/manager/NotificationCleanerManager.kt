@@ -17,6 +17,28 @@ class NotificationCleanerManager(
     companion object {
         const val ACTION_TOO_MANY_NOTIFICATIONS = "ACTION_TOO_MANY_NOTIFICATIONS"
         const val NOTIFICATION_SIMPLE_NOTICLEANER_CODE = 1337
+
+
+        // private volatile instance variable to hold the singleton instance
+        @Volatile
+        lateinit var INSTANCE: NotificationCleanerManager
+
+        // public function to retrieve the singleton instance
+        fun getInstance(context: Context): NotificationCleanerManager {
+            // Check if the instance is already created
+            if (!this::INSTANCE.isInitialized) {
+                // synchronize the block to ensure only one thread can execute at a time
+                synchronized(this) {
+                    // check again if the instance is already created
+                    if (!this::INSTANCE.isInitialized) {
+                        // create the singleton instance
+                        INSTANCE = NotificationCleanerManager(context)
+                    }
+                }
+            }
+            // return the singleton instance
+            return INSTANCE
+        }
     }
 
     var showNotificationAction: () -> Unit = {}

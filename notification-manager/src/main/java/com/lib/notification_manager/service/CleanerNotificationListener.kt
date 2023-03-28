@@ -11,7 +11,7 @@ class CleanerNotificationListener : NotificationListenerService() {
 
     override fun onCreate() {
         super.onCreate()
-        notificationCleanerManager = NotificationCleanerManager(applicationContext)
+        notificationCleanerManager = NotificationCleanerManager.getInstance(applicationContext)
     }
 
     override fun onNotificationPosted(sbn: StatusBarNotification) {
@@ -48,6 +48,6 @@ class CleanerNotificationListener : NotificationListenerService() {
     }
 
     private fun addNotificationToDelete(sbn: StatusBarNotification) {
-            notificationCleanerManager.addNotification(sbn, notificationCleanerManager.notificationsListToDelete)
+        notificationCleanerManager.addNotification(sbn, notificationCleanerManager.notificationsListToDelete)
     }
 }
