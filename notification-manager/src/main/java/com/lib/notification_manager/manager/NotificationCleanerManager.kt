@@ -19,6 +19,7 @@ class NotificationCleanerManager(
         const val NOTIFICATION_SIMPLE_NOTICLEANER_CODE = 1337
 
 
+        // TODO Change that singleton logic because of memory leak
         // private volatile instance variable to hold the singleton instance
         @Volatile
         lateinit var INSTANCE: NotificationCleanerManager
