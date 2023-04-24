@@ -142,4 +142,8 @@ class NotificationCleanerManager(
                     it.value.size
                 )
             }
+
+    fun getUniqueNotificationsCount(): Int = notificationsList.groupBy { it.applicationName }.size
+
+    fun isWarning(notificationCount: Int) = getUniqueNotificationsCount() > notificationCount
 }
