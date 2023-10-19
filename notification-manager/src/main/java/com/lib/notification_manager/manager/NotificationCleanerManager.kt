@@ -4,6 +4,7 @@ import android.app.ActivityManager
 import android.app.NotificationManager
 import android.content.Context
 import android.content.pm.PackageManager
+import android.content.pm.PackageManager.NameNotFoundException
 import android.content.res.Resources.NotFoundException
 import android.service.notification.StatusBarNotification
 import androidx.core.content.res.ResourcesCompat
@@ -65,7 +66,7 @@ class NotificationCleanerManager(
         val icon = try {
             val resources = packageManager.getResourcesForApplication(sbn.packageName)
             ResourcesCompat.getDrawable(resources, iconId, null)
-        } catch (e: NotFoundException) {
+        } catch (e: NameNotFoundException) {
             val appList = packageManager.getInstalledApplications(PackageManager.GET_META_DATA)
             appList.find { it.packageName == sbn.packageName }?.loadIcon(packageManager)
         }
