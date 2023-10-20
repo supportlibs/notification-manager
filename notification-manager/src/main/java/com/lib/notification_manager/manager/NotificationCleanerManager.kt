@@ -8,6 +8,7 @@ import android.content.pm.PackageManager.NameNotFoundException
 import android.content.res.Resources.NotFoundException
 import android.service.notification.StatusBarNotification
 import androidx.core.content.res.ResourcesCompat
+import com.lib.notification_manager.R
 import com.lib.notification_manager.data.NotificationModel
 import com.lib.notification_manager.data.NotificationModelWrapper
 
@@ -69,6 +70,11 @@ class NotificationCleanerManager(
         } catch (e: NameNotFoundException) {
             val appList = packageManager.getInstalledApplications(PackageManager.GET_META_DATA)
             appList.find { it.packageName == sbn.packageName }?.loadIcon(packageManager)
+        } catch (e: NotFoundException) {
+            val appList = packageManager.getInstalledApplications(PackageManager.GET_META_DATA)
+            appList.find { it.packageName == sbn.packageName }?.loadIcon(packageManager)
+        } catch (e: Exception) {
+            ResourcesCompat.getDrawable(context.resources,R.drawable.ic_launcher_foreground, null)
         }
 
         val applicationInfo = packageManager.getApplicationInfo(sbn.packageName, 0)
