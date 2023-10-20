@@ -46,7 +46,7 @@ class NotificationCleanerManager(
     var showNotificationAction: () -> Unit = {}
 
     private val sharePreferencesManager = SharePreferencesManager(context)
-    val notificationsList = mutableListOf<NotificationModel>()
+    var notificationsList = mutableListOf<NotificationModel>()
     val notificationsListToDelete = mutableListOf<NotificationModel>()
     var removeAction: ((NotificationKeys: Array<String>) -> Unit) = {}
     var onRemovedAction: (() -> Unit) = {}
@@ -110,7 +110,10 @@ class NotificationCleanerManager(
 
     fun onNotificationRemoved(sbn: StatusBarNotification?) {
         sbn?.let {
-            notificationsList.removeAll { it.id == sbn.id }
+            val newList = notificationsList.map { it.copy() }.toMutableList()
+            newList.removeAll {it.id == sbn.id }
+
+            notificationsList = newList
             onRemovedAction()
             if (notificationCount <= 4) hideNotification()
         }
