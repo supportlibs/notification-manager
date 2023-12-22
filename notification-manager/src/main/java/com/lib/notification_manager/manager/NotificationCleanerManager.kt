@@ -74,7 +74,8 @@ class NotificationCleanerManager(
             val appList = packageManager.getInstalledApplications(PackageManager.GET_META_DATA)
             appList.find { it.packageName == sbn.packageName }?.loadIcon(packageManager)
         } catch (e: Exception) {
-            ResourcesCompat.getDrawable(context.resources,R.drawable.ic_launcher_foreground, null)
+            ResourcesCompat.getDrawable(context.resources,
+                androidx.loader.R.drawable.notification_template_icon_bg, null)
         }
 
         val applicationInfo = packageManager.getApplicationInfo(sbn.packageName, 0)
